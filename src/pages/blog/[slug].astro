@@ -1,0 +1,56 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import Main from "../../components/Main.astro";
+import { Icon } from "astro-icon";
+import H1 from "../../components/H1.astro";
+import TableOfContents from "../../components/TableOfContents.astro";
+import Share from "../../components/Share.astro";
+
+export const getStaticPaths = async () => {
+  const posts = await getCollection("posts");
+
+  const paths = posts.map((post) => {
+    return {
+      params: { slug: post.slug },
+      props: { post },
+    };
+  });
+
+  return paths;
+};
+
+type Props = {
+  post: CollectionEntry<"posts">;
+};
+
+const { post } = Astro.props;
+
+const { Content, headings } = await post.render();
+---
+
+<Layout title={post.data.title}>
+  <Main>
+    <a
+      href="/blog"
+      class="flex items-center text-zinc-500 text-2xl mb-16 underline">
+      <Icon name="mdi:arrow-left" class="w-6 h-6" />
+       Back to all blogs</a
+    >
+    <H1 text={post.data.title} />
+    <Image
+      src={post.data.image}
+      alt={post.data.title}
+      class="rounded-2xl shadow-xl mb-6 aspect-thumbnail object-cover"
+    />
+    <div class="relative flex gap-x-12">
+      <Share post={post} />
+      <div
+        class="prose prose-xl max-w-none overflow-visible relative prose-h2:text-blue-600 hover:prose-h2:text-blue-500">
+        <Content />
+      </div>
+      <TableOfContents headings={headings} />
+    </div>
+  </Main>
+</Layout>
