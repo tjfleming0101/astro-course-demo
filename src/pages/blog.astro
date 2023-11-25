@@ -4,16 +4,21 @@ import Layout from "../layouts/Layout.astro";
 import PostList from "../components/PostList.astro";
 import Main from "../components/Main.astro";
 import H1 from "../components/H1.astro";
+import Pagination from "../components/Pagination.astro";
 
-const allPosts = await getCollection("posts");
+const posts = (await getCollection("posts")).slice(0, 6);
 ---
 
 <Layout title="Blog - Astro Course">
   <Main>
     <H1 text="Rythm Nation Blog" />
-    <p class="text-zinc-900 text-2xl mb-24 max-sm:mb-14">
+    <p class="text-zinc-900 text-2xl mb-12 max-sm:mb-14">
       Join the Community and learn from Music Producers and Enthusiasts
     </p>
-    <PostList posts={allPosts} />
+    <Pagination nextURL="/blog/2" />
+    <PostList posts={posts} />
+    <div class="mt-5">
+      <Pagination nextURL="/blog/2" />
+    </div>
   </Main>
 </Layout>

@@ -1,11 +1,12 @@
 ---
-
+import { Image } from "astro:assets";
+import Logo from "../images/heartbeat.png";
 ---
 
 <header class="bg-green-950 mb-5">
   <div class="px-24 max-sm:px-5 max-sm:pb-10 max-w-7xl mx-auto w-full">
     <a href="/" class="flex items-center gap-x-4">
-      <img src="/heartbeat.png" alt="rythm nation logo" class="w-16" />
+      <Image src={Logo} alt="rythm nation logo" width={72} height={72} />
       <p class="uppercase text-3xl text-zinc-300">blog</p>
     </a>
   </div>
