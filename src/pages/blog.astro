@@ -9,7 +9,9 @@ import Pagination from "../components/Pagination.astro";
 const posts = (await getCollection("posts")).slice(0, 6);
 ---
 
-<Layout title="Blog - Astro Course">
+<Layout
+  title="Blog - Rythm Nation"
+  description="Read and learn from Music Products and Enthusiasts">
   <Main>
     <H1 text="Rythm Nation Blog" />
     <p class="text-zinc-900 text-2xl mb-12 max-sm:mb-14">
