@@ -7,7 +7,7 @@ type Props = {
 const { prevURL, nextURL } = Astro.props;
 ---
 
-<div class="flex justify-between mb-12">
+<div class="flex justify-between mb-8">
   {
     prevURL ? (
       <a
@@ -19,7 +19,6 @@ const { prevURL, nextURL } = Astro.props;
       <div />
     )
   }
-
   {
     nextURL ? (
       <a

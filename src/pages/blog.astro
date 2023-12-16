@@ -5,8 +5,11 @@ import PostList from "../components/PostList.astro";
 import Main from "../components/Main.astro";
 import H1 from "../components/H1.astro";
 import Pagination from "../components/Pagination.astro";
+import CategoryList from "../components/CategoryList.astro";
 
-const posts = (await getCollection("posts")).slice(0, 6);
+const posts = (await getCollection("posts")).slice(0, 4);
+const allCategories = posts.flatMap((post) => post.data.categories);
+const categories = Array.from(new Set(allCategories));
 ---
 
 <Layout
@@ -17,6 +20,9 @@ const posts = (await getCollection("posts")).slice(0, 6);
     <p class="text-zinc-900 text-2xl mb-12 max-sm:mb-14">
       Join the Community and learn from Music Producers and Enthusiasts
     </p>
+
+    <CategoryList categories={categories} />
+
     <Pagination nextURL="/blog/2" />
     <PostList posts={posts} />
     <div class="mt-5">
